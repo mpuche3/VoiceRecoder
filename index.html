@@ -28,6 +28,17 @@
 <body>
     <div class="circle" id="circle"></div>
     <script>
+
+        const stream = await navigator.mediaDevices.getUserMedia({
+            audio: {
+                sampleRate: 48000,
+                channelCount: 1,
+                echoCancellation: false,
+                noiseSuppression: false,
+                autoGainControl: false
+            }
+        });
+
         (async function () {
             const circle = document.getElementById('circle');
             let mediaRecorder;
