@@ -93,6 +93,10 @@
                 const key = event.key.toLowerCase();
 
                 if ((key === 's' || key === 'enter') && mediaRecorder && mediaRecorder.state === 'inactive' && !event.repeat) {
+                    if (audio && !audio.paused) {
+                        audio.pause();
+                        audio.currentTime = 0;
+                    }
                     audioChunks = [];
                     mediaRecorder.start();
                     changeState('recording');
