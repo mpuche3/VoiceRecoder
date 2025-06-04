@@ -31,7 +31,7 @@
     <script>
         (async function () {
 
-            const stream = await navigator.mediaDevices.getUserMedia({
+            const constraints = {
                 audio: {
                     sampleRate: 48000,
                     channelCount: 1,
@@ -39,7 +39,7 @@
                     noiseSuppression: false,
                     autoGainControl: false
                 }
-            });
+            };
 
             const circle = document.getElementById('circle');
             let mediaRecorder;
@@ -49,7 +49,7 @@
 
 
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const stream = await navigator.mediaDevices.getUserMedia(constraints);
                 const options = {};
                 if (MediaRecorder.isTypeSupported('audio/webm; codecs=opus')) {
                     options.mimeType = 'audio/webm; codecs=opus';
@@ -133,16 +133,18 @@
                 }
             });
 
-            document.querySelector("#circle").addEventListener('click', e => {
+            circle.addEventListener('click', () => {
+                if (!audio) return;
                 if (!audio.paused) {
                     audio.pause();
                     audio.currentTime = 0;
                 }
                 audio.play();
-            })
+            });
 
-            document.querySelector("#circle").addEventListener('touchstart', (e) => {
+            circle.addEventListener('touchstart', e => {
                 e.stopPropagation();
+                if (!audio) return;
                 if (!audio.paused) {
                     audio.pause();
                     audio.currentTime = 0;
