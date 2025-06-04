@@ -27,6 +27,7 @@
 
 <body>
     <div class="circle" id="circle"></div>
+    <script src="changeState.js"></script>
     <script>
         (async function () {
 
@@ -46,18 +47,6 @@
             let audio;
             let lastBlob = null;
 
-            function changeState(state) {
-                switch (state) {
-                    case 'recording':
-                        circle.style.backgroundColor = 'red';
-                        break;
-                    case 'replaying':
-                        circle.style.backgroundColor = 'blue';
-                        break;
-                    default:
-                        circle.style.backgroundColor = 'gray';
-                }
-            }
 
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
