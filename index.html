@@ -131,7 +131,7 @@
             });
 
             document.body.addEventListener('touchstart', (e) => {
-                if (mediaRecorder && mediaRecorder.state === 'inactive' && !event.repeat) {
+                if (mediaRecorder && mediaRecorder.state === 'inactive') {
                     audioChunks = [];
                     mediaRecorder.start();
                     changeState('recording');
@@ -153,7 +153,7 @@
             })
 
             document.querySelector("#circle").addEventListener('touchstart', (e) => {
-                event.stopPropagation();
+                e.stopPropagation();
                 if (!audio.paused) {
                     audio.pause();
                     audio.currentTime = 0;
