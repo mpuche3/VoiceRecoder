@@ -13,7 +13,6 @@
   let mediaRecorder;
   let audioChunks = [];
   let audio;
-  let lastBlob = null;
 
   try {
     const stream = await navigator.mediaDevices.getUserMedia(constraints);
@@ -30,7 +29,6 @@
     mediaRecorder.addEventListener('stop', () => {
       const blob = new Blob(audioChunks, { type: options.mimeType || 'audio/webm' });
       audioChunks = [];
-      lastBlob = blob;
 
       if (audio) URL.revokeObjectURL(audio.src);
 
